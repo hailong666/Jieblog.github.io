@@ -409,7 +409,7 @@
           <h3 id="守护进程模块设计思路"><a href="#守护进程模块设计思路" class="headerlink" title="守护进程模块设计思路"></a>守护进程模块设计思路</h3><h5 id="设计思路："><a href="#设计思路：" class="headerlink" title="设计思路："></a>设计思路：</h5><p>首先应该从配置文件中读取配置，判断<strong>配置文件</strong>中<strong>是否决定启动守护进程</strong>。若启动守护进程，那么一个进程应该做的事情是：</p>
 <ul>
 <li><strong>父进程忽略SIGCHLD信号</strong></li>
-<li><strong>fork一个子进程</strong></li>
+<li><strong>进程调用fork函数创建一个子进程</strong></li>
 <li><strong>将父进程关闭</strong></li>
 <li><strong>子进程设置新的会话</strong></li>
 <li><strong>打开 “/dev/null” 文件（LInux中的黑洞文件），把标准的输入输出和错误都重定位到“黑洞”中</strong></li>
