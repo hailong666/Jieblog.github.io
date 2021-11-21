@@ -293,6 +293,199 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/21/%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myhead.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长日记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/11/21/%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/" itemprop="url">日志模块设计思路</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-21T23:35:38+08:00">
+                2021-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ratel%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%B3%BB%E5%88%97/" itemprop="url" rel="index">
+                    <span itemprop="name">Ratel框架设计系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/11/21/%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/11/21/%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/11/21/%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/" class="leancloud_visitors" data-flag-title="日志模块设计思路">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="日志模块设计思路"><a href="#日志模块设计思路" class="headerlink" title="日志模块设计思路"></a>日志模块设计思路</h2><blockquote>
+<p>日志系统是一个项目不可或缺的东西，太存在的意义就是可以为我们输出一些关键信息，因为我们作为一个开发工程师，在项目还没有上线的时候我们可以使用本地调试工具来调试程序，也可以在调试工具或者控制台上输出一些关键信息来定位BUG，但是一旦我们开发的程序投入使用，那么我定位BUG和快速分析和修复线上系统出现的问题，唯一能靠的就是日志了。</p>
+</blockquote>
+<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><p>一个<strong>日志类</strong>所<strong>必备</strong>的东西：</p>
+<pre><code>1. 存放日志输出的路径（或指向这个打开文件的文件指针）
+2. 一个判断路径所包含的文件是否打开成功
+3. 日志文件的文件名
+4. 静态的输出函数(用来把字符串输出到文件中)
+</code></pre>
+<blockquote>
+<p>一个文件打开失败可以有多种原因，比如文件被占用、文件的权限不够等等。在C++语言中，我们<strong>不可以在构造函数中抛出异常</strong>（见<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzUxMTk4MDkzOA==&mid=2247483675&idx=1&sn=afdeb1e4af58d3518229ada5977223cd&chksm=f96a25fece1dace8fc7ac5c26fa17443a471cea8d7a851213e46f249a1c8bfb7de1230563491#rd">Effective C++</a>），因此当文件打开失败的时候我们有必要使用这个标志来判断文件是否打开成功，在后续的写日志或其他操作前进行判断并处理</p>
+</blockquote>
+<p>日志类<strong>可锦上添花</strong>的东西：</p>
+<ol>
+<li>设置不同的日志级别，如<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzUxMTk4MDkzOA==&mid=2247483729&idx=1&sn=774022250827ea0a6aa07664627dce92&chksm=f96a25b4ce1daca2e74662efa0ccd32d5110fe49a5486caea410296d80d8cdcc24620d9743d0#rd">Ratel后端网络框架</a>中我对日志简单的分了四个级别：<strong>调试、信息、警告、错误</strong> 级别是在不断的上升</li>
+<li>利用宏定义简化输出(不理解的话，会在之后的代码中体现出来)</li>
+<li>利用单例模式保证全局只有一个日志存在，方便输出</li>
+<li>设计日志锁，写日志的时候加锁</li>
+</ol>
+<blockquote>
+<p>日志的设计大概可以分成两种设计思想：多线程+锁机制  和 单线程+线程池异步排队。</p>
+<p>日志在输出的时候应该尽量设计的详细一些，例如包含线程号、文件名、行号和打印时间等相关信息，这样更能有利于定位和解决问题。</p>
+</blockquote>
+<p>现在大概的思路已经有了，其他的细节一看源码便知，接下来细说一下输出函数</p>
+<p>我认为日志系统的输出函数<strong>最好设计成可变参数并且可以格式化字串</strong>因为对于日志来说这很有必要，否则在使用的时候不得不先进行字符串的格式化，然后再传入日志系统的输出函数中，这样设计非常的不友好，因此这些最好都交给日志系统自己来处理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CLog::output</span><span class="params">(Log_level level, <span class="keyword">char</span>* fmt, ...)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!isok_open) <span class="built_in">assert</span>(<span class="string">&quot;日志文件打开失败&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取可变参数开始</span></span><br><span class="line">	va_list va;</span><br><span class="line">	<span class="built_in">va_start</span>(va,fmt);</span><br><span class="line">	<span class="keyword">int</span> strlength = <span class="built_in">vsnprintf</span>((<span class="keyword">char</span>* )<span class="literal">nullptr</span>, <span class="number">0</span>, fmt, va);  <span class="comment">//用来计算需要的长度</span></span><br><span class="line">	<span class="built_in">va_end</span>(va);</span><br><span class="line"></span><br><span class="line">	std::string stroutput;</span><br><span class="line">	stroutput.<span class="built_in">resize</span>(strlength + <span class="number">1</span>);	<span class="comment">//加上末尾\0</span></span><br><span class="line"></span><br><span class="line">	va_list vb;</span><br><span class="line">	<span class="built_in">va_start</span>(vb,fmt);</span><br><span class="line">	<span class="built_in">vsnprintf</span>((<span class="keyword">char</span>*)stroutput.<span class="built_in">data</span>(), stroutput.<span class="built_in">capacity</span>(), fmt, vb); <span class="comment">//把格式化后的放到变量中</span></span><br><span class="line">	<span class="built_in">va_end</span>(vb);</span><br><span class="line">	<span class="comment">//获取可变参数结束</span></span><br><span class="line"></span><br><span class="line">	std::string strhead = <span class="built_in">makeHead</span>(level); <span class="comment">//根据传入日志的等级构造必要的日志头</span></span><br><span class="line">	strhead += stroutput + <span class="string">&#x27;\n&#x27;</span>; <span class="comment">//日志头和日志内容相加</span></span><br><span class="line"></span><br><span class="line">	fp.<span class="built_in">write</span>(strhead.<span class="built_in">c_str</span>(),strhead.<span class="built_in">size</span>());</span><br><span class="line">	fp.<span class="built_in">flush</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>文提到的日志的分类和宏定义设计</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">Log_level</span>&#123;</span></span><br><span class="line">	LOG_DEBUG,		 <span class="comment">//调试输出</span></span><br><span class="line">	LOG_INFO,		<span class="comment">//信息输出</span></span><br><span class="line">	LOG_WARNING,	<span class="comment">//警告信息</span></span><br><span class="line">	LOG_ERROR		<span class="comment">//错误信息</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//宏定义用来简化调用，使用起来更方便</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG(Level,...) CLog::output(Level, __VA_ARGS__) <span class="comment">//通用LOG输出，便于下面的宏定义使用</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGD(...) LOG(Log_level::LOG_DEBUG, __VA_ARGS__)  <span class="comment">//对应于调试输出打印</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGI(...) LOG(Log_level::LOG_INFO, __VA_ARGS__)   <span class="comment">//对应于信息输出打印</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGW(...) LOG(Log_level::LOG_WARNING, __VA_ARGS__)<span class="comment">//对应于警告信息打印</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGE(...) LOG(Log_level::LOG_ERROR, __VA_ARGS__)  <span class="comment">//对应于错误信息打印</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>日志系统算是比较核心的一个模块，应该尽量考虑的全面一些，这样才能为以后定位、调试线上出现的问题提供便利，不能说是一劳永逸，但能说为了以后节省了大量的时间和精力</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/15/CDaemon%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1359,7 +1552,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
